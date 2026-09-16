@@ -20,9 +20,9 @@ jobs:
           - true
           - false
         include:
-          - setup-python: true
+          - aqt-setup-python: true
             python-ver: 3.14
-          - setup-python: true
+          - aqt-setup-python: true
             python-ver: 3.13
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
@@ -52,9 +52,11 @@ jobs:
         shell: bash
 
       - name: Setup Python
-        if: ${{ matrix.setup-python }}
+        if: ${{ matrix.aqt-setup-python == 'false' }}
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: ${{ matrix.python-ver }}
 
       - uses: ./
+        with:
+          setup-python: ${{ matrix.aqt-setup-python }}
