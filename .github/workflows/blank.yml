@@ -1,0 +1,60 @@
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # https://docs.github.com/en/actions/reference/runners/github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+        os:
+          - ubuntu-slim
+          - ubuntu-22.04
+          - windows-2022
+          - macos-15-intel
+          - macos-15
+        setup-python:
+          - true
+          - false
+        include:
+          - setup-python: true
+            python-ver: 3.14
+          - setup-python: true
+            python-ver: 3.13
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          repository: jurplel/install-qt-action
+          # ref: v4.4.0
+
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: action/
+
+      - run: |
+          cd action
+          npm ci || npm install
+        shell: bash
+      - run: |
+          cd action
+          npm run build
+      # See the root "action.yml" file.
+      - name: Use local built internal action (hack)
+        run: |
+          sed -i.bak 's|uses: $/action|uses: ./action|' action.yml
+          diff -u action.yml.bak action.yml || true
+          git status --porcelain
+        shell: bash
+
+      - name: Setup Python
+        if: ${{ matrix.setup-python  == 'true' }}
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: ${{ matrix.python-ver }}
+
+      - uses: ./
