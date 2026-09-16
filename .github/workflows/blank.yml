@@ -23,8 +23,6 @@ jobs:
           - aqt-setup-python: false
             python-ver: 3.14
           - aqt-setup-python: false
-            python-ver: ''
-          - aqt-setup-python: false
             python-ver: 3.13
           - aqt-setup-python: false
             python-ver: ''
