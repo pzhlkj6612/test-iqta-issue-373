@@ -20,9 +20,9 @@ jobs:
           - true
           - false
         include:
-          - aqt-setup-python: true
+          - aqt-setup-python: false
             python-ver: 3.14
-          - aqt-setup-python: true
+          - aqt-setup-python: false
             python-ver: 3.13
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
