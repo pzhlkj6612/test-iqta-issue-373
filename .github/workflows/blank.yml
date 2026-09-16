@@ -16,7 +16,7 @@ jobs:
           - windows-2022
           - macos-15-intel
           - macos-15
-        setup-python:
+        aqt-setup-python:
           - true
           - false
         include:
