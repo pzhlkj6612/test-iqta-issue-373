@@ -31,8 +31,8 @@ jobs:
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
-          repository: jurplel/install-qt-action
-          # ref: v4.4.0
+          repository: pzhlkj6612/forked-install-qt-action
+          ref: 06bc6c4bcd6fe5dc4da95515acd692b01601a8fc
 
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
