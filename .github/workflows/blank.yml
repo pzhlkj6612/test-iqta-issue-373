@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           repository: pzhlkj6612/forked-install-qt-action
-          ref: 06bc6c4bcd6fe5dc4da95515acd692b01601a8fc
+          ref: 131cbfd2dff9d8e7d4c714be9ad79e238690b529
 
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
